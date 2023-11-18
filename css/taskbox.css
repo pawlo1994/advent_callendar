@@ -1,0 +1,87 @@
+.taskBox {
+    display: block;
+    transition: ease 0.5s;
+    transition-property: opacity;
+    background-color: rgba(171, 171, 171, 0.499);
+    z-index: 4;
+    position: absolute;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.taskBox--hidden {
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+@keyframes letItSnow {
+    from {
+        background-image: linear-gradient(45deg, #fff, #ccc);
+    }
+
+    to {
+        background-image: linear-gradiet(-45deg, #ddd, #aaa);
+    }
+}
+
+.taskBox--merryChristmassed {
+    animation-name: letItSnow;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+.taskBox__Content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    background-color: #cccccc;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 5px #fff;
+    margin: 100px auto;
+    object-fit: contain;
+    max-width: 600px;
+    padding: 30px;
+}
+
+.taskBox__Content--merryChristmassed {
+    animation-name: letItSnow;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+.taskBox__Button {
+    align-self: center;
+    background-color: #eee;
+    transition: linear 0.3s;
+    transition-property: filter;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 3px #fff;
+}
+
+.taskBox__Button:hover {
+    filter: brightness(120%);
+    cursor: pointer;
+}
+
+.taskBox__Button:active {
+    filter: invert();
+}
+
+.taskBox__ContentHeader {
+    font-size: 28px;
+    text-shadow: 2px 2px 3px #fff;
+}
+
+.taskBox__ContentParagraph {
+    font-size: 18px;
+    padding: 0px 0px 20px;
+}
