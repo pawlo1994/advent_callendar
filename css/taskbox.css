@@ -18,17 +18,15 @@
     user-select: none;
 }
 
-@keyframes letItSnow {
-    from {
-        background-image: linear-gradient(45deg, #fff, #ccc);
-    }
-
-    to {
-        background-image: linear-gradiet(-45deg, #ddd, #aaa);
-    }
-}
-
 .taskBox--merryChristmassed {
+    --dot-bg: rgb(73, 177, 218);
+    --dot-color: rgb(234, 234, 234);
+    --dot-size: 5px;
+    --dot-space: 22px;
+    background:
+        linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+        linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+        var(--dot-color);
     animation-name: letItSnow;
     animation-timing-function: ease;
     animation-iteration-count: infinite;
@@ -47,13 +45,6 @@
     object-fit: contain;
     max-width: 600px;
     padding: 30px;
-}
-
-.taskBox__Content--merryChristmassed {
-    animation-name: letItSnow;
-    animation-timing-function: ease;
-    animation-iteration-count: infinite;
-    animation-duration: 2s;
 }
 
 .taskBox__Button {
@@ -77,11 +68,78 @@
 }
 
 .taskBox__ContentHeader {
+    margin-bottom: 5px;
     font-size: 28px;
     text-shadow: 2px 2px 3px #fff;
+}
+
+.taskBox__ContentSubHeader {
+    margin-bottom: 5px;
+    font-size: 24px;
+    text-shadow: 3px 3px 5px #999;
+    align-self: center;
+}
+
+.taskBox__ContentQuote {
+    align-self: center;
+    margin-top: 5px;
+    font-size: 20px;
+    text-shadow: -2px 2px 2px #fff;
+    line-height: 1.3;
+}
+
+.taskBox__ContentQuoteAuthor {
+    display: block;
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: right;
+    text-shadow: none;
 }
 
 .taskBox__ContentParagraph {
     font-size: 18px;
     padding: 0px 0px 20px;
+}
+
+.taskBox__ContentParagraph--merryChristmassed {
+    font-size: 20px;
+    padding: 0px 0px 20px;
+    align-self: center;
+    text-transform: uppercase;
+    animation-name: blinkText;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-duration: 1s;
+}
+
+@keyframes letItSnow {
+    from {
+        background-position-x: 0px;
+        background-position-y: 0px;
+    }
+
+    50% {
+        background-position-x: 30px;
+        background-position-y: 100px;
+    }
+
+    to {
+        background-position-x: 0px;
+        background-position-y: 200px;
+    }
+}
+
+@keyframes blinkText {
+    from {
+        color: initial;
+    }
+
+    50% {
+        color: rgb(3, 169, 28);
+    }
+
+    to {
+        color: rgb(255, 225, 0);
+    }
 }
