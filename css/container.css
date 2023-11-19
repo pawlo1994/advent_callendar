@@ -49,8 +49,14 @@
 }
 
 .containerButton--locked::after {
-    display: inline;
-    content: "🔒";
+    display: block;
+    margin: 0 auto;
+    content: "";
+    background-color: transparent;
+    background-image: url("../images/locked.png");
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 .containerButton--done {
@@ -59,8 +65,14 @@
 }
 
 .containerButton--done::after {
-    display: inline;
-    content: "✅";
+    display: block;
+    margin: 0 auto;
+    content: "";
+    background-color: transparent;
+    background-image: url("../images/done.png");
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 .containerButton:disabled {
