@@ -1,9 +1,22 @@
 {
     const tasks = JSON.parse(localStorage.getItem("tasks"));
-    const quotes = JSON.parse(localStorage.getItem("quotes"));
     const author = "Robert Baden-Powell";
+    const quotes = [
+        {
+            content: "Starajcie się zostawić ten świat troszkę lepszym niż go zastaliście",
+            author
+        },
+        {
+            content: "Nie błądzi tylko ten, kto nic nie robi",
+            author
+        },
+        {
+            content: "Życie bez przygód byłoby strasznie głupie",
+            author
+        },
+    ];
+
     let isDone = false;
-    let isUsed = false;
 
     let listOfTasks = (tasks == null) ? [
         {
@@ -128,24 +141,6 @@
         }
     ] : tasks;
 
-    let listOfQuotes = (quotes == null) ? [
-        {
-            content: "Starajcie się zostawić ten świat troszkę lepszym niż go zastaliście",
-            author,
-            isUsed
-        },
-        {
-            content: "Nie błądzi tylko ten, kto nic nie robi",
-            author,
-            isUsed
-        },
-        {
-            content: "Życie bez przygód byłoby strasznie głupie",
-            author,
-            isUsed
-        },
-    ] : quotes;
-
     const toggleTaskDone = (tasks, dayOfMonth) => {
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
         tasks = [
@@ -158,23 +153,29 @@
     const setTaskBoxContent = (tasks, taskBox, containerButton, dayOfMonth) => {
         const taskBoxContent = document.querySelector(".js-taskBox__Content");
         let taskIndex = tasks.findIndex(({ dayNumber }) => dayNumber === +containerButton.innerText);
-        console.log(taskIndex);
         switch (taskIndex) {
             case taskIndex:
                 {
-                    if ((+containerButton.innerText) === 23) {
+                    if ((+containerButton.innerText) === 24) {
                         taskBoxContent.classList.add("taskBox__Content--merryChristmassed");
                         taskBox.classList.add("taskBox--merryChristmassed");
                         taskBoxContent.innerHTML = `
             <h2 class="taskBox__ContentHeader">Zadanie nr ${(+containerButton.innerText)}</h2>
+                <h3 class="taskBox__ContentSubHeader">Cytat na dziś:</h3>
+                    <p class="taskBox__ContentQuote">
+                        ${quotes[(+containerButton.innerText) % 3].content}
+                        <span class="taskBox__ContentQuoteAuthor">
+                        ${quotes[(+containerButton.innerText) % 3].author}
+                        </span>
+                    </p>
                 <p class="taskBox__ContentParagraph">
                     ${tasks[(+taskIndex)].content}
                 </p>
                 <button class="taskBox__Button js-taskBox__button">
-                    Wzajemnie!!!
+                    Wzajemnie!
                 </button>`
-                    }
-                    taskBoxContent.innerHTML = `
+                    } else {
+                        taskBoxContent.innerHTML = `
             <h2 class="taskBox__ContentHeader">Zadanie nr ${(+containerButton.innerText)}</h2>
                 <p class="taskBox__ContentParagraph">
                     ${tasks[(+taskIndex)].content}
@@ -183,6 +184,7 @@
                     Do dzieła!
                 </button>
         `;
+                    }
                     const taskBoxButton = document.querySelector(".js-taskBox__button");
                     taskBoxButton.addEventListener("click", () => {
                         toggleTaskDone(tasks, (+containerButton.innerText), dayOfMonth);
@@ -223,7 +225,7 @@
 
     const render = () => {
         const date = new Date(Date.now());
-        const dayOfMonth = date.getDate();
+        const dayOfMonth = date.getDate() + 5;
         renderButtons(listOfTasks, dayOfMonth);
         const taskBox = document.querySelector(".js-taskBox");
         containerButtonsEvents(listOfTasks, taskBox, dayOfMonth);
