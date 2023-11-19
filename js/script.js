@@ -1,6 +1,9 @@
 {
     const tasks = JSON.parse(localStorage.getItem("tasks"));
+    const quotes = JSON.parse(localStorage.getItem("quotes"));
+    const author = "Robert Baden-Powell";
     let isDone = false;
+    let isUsed = false;
 
     let listOfTasks = (tasks == null) ? [
         {
@@ -124,6 +127,24 @@
             isDone
         }
     ] : tasks;
+
+    let listOfQuotes = (quotes == null) ? [
+        {
+            content: "Starajcie się zostawić ten świat troszkę lepszym niż go zastaliście",
+            author,
+            isUsed
+        },
+        {
+            content: "Nie błądzi tylko ten, kto nic nie robi",
+            author,
+            isUsed
+        },
+        {
+            content: "Życie bez przygód byłoby strasznie głupie",
+            author,
+            isUsed
+        },
+    ] : quotes;
 
     const toggleTaskDone = (tasks, dayOfMonth) => {
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
