@@ -74,6 +74,7 @@
 }
 
 .taskBox__ContentSubHeader {
+    font-weight: normal;
     margin-bottom: 5px;
     font-size: 24px;
     text-shadow: 3px 3px 5px #999;
