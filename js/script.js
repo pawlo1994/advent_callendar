@@ -178,7 +178,7 @@
                     } else {
                         taskBoxContent.innerHTML = `
             <h2 class="taskBox__ContentHeader">Zadanie nr ${(+containerButton.innerText)}</h2>
-            <h3 class="taskBox__ContentSubHeader">Cytat na dziś:</h3>
+                <h3 class="taskBox__ContentSubHeader">Cytat na dziś:</h3>
                     <p class="taskBox__ContentQuote">
                         ${quotes[(+containerButton.innerText) % 3].content}
                         <span class="taskBox__ContentQuoteAuthor">
