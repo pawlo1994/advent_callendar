@@ -225,7 +225,7 @@
 
     const render = () => {
         const date = new Date(Date.now());
-        const dayOfMonth = date.getDate() + 5;
+        const dayOfMonth = date.getDate();
         renderButtons(listOfTasks, dayOfMonth);
         const taskBox = document.querySelector(".js-taskBox");
         containerButtonsEvents(listOfTasks, taskBox, dayOfMonth);
