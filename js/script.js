@@ -214,15 +214,15 @@
         });
     };
 
-    const renderButtons = (tasks, dayOfMonth) => {
+    const renderButtons = (tasks, dayOfMonth, month) => {
         const container = document.querySelector(".js-container");
         let HTMLString = "";
 
         tasks.forEach((task) => {
             HTMLString +=
                 `<button class=
-                "containerButton js-containerButton ${((task.dayNumber === dayOfMonth) && (task.isDone === false)) ? "" : "containerButton--locked"} ${(task.isDone === false) ? "" : "containerButton--done"}" 
-                ${((task.dayNumber !== dayOfMonth) || (task.isDone === true)) ? "disabled" : ""}>
+                "containerButton js-containerButton ${((month === 12) && (task.dayNumber === dayOfMonth) && (task.isDone === false)) ? "" : "containerButton--locked"} ${(task.isDone === false) ? "" : "containerButton--done"}" 
+                ${((task.dayNumber !== dayOfMonth) || (month !== 12) || (task.isDone === true)) ? "disabled" : ""}>
                         ${task.dayNumber}
                 </button>`;
         });
@@ -234,7 +234,8 @@
     const render = () => {
         const date = new Date(Date.now());
         const dayOfMonth = date.getDate();
-        renderButtons(listOfTasks, dayOfMonth);
+        const month = date.getMonth() + 1;
+        renderButtons(listOfTasks, dayOfMonth, month);
         const taskBox = document.querySelector(".js-taskBox");
         containerButtonsEvents(listOfTasks, taskBox, dayOfMonth);
     };
