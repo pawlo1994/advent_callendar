@@ -153,45 +153,36 @@
     const setTaskBoxContent = (tasks, taskBox, containerButton, dayOfMonth) => {
         const taskBoxContent = document.querySelector(".js-taskBox__Content");
         let taskIndex = tasks.findIndex(({ dayNumber }) => dayNumber === +containerButton.innerText);
+        let quoteIndex = (+containerButton.innerText) % 3;
         switch (taskIndex) {
             case taskIndex:
                 {
+                    taskBoxContent.innerHTML = `
+                    <p class="taskBox__ContentQuote">
+                    ${quotes[quoteIndex].content}
+                    <span class="taskBox__ContentQuoteAuthor">
+                    ${quotes[quoteIndex].author}
+                    </span>
+                    </p>
+                        <h2 class="taskBox__ContentHeader">Zadanie nr ${(+containerButton.innerText)}</h2>
+                            <p class="taskBox__ContentParagraph js-taskBox__ContentParagraph">
+                                ${tasks[(+taskIndex)].content}
+                            </p>
+                    `;
                     if ((+containerButton.innerText) === 24) {
                         taskBox.classList.add("taskBox--merryChristmassed");
-                        taskBoxContent.innerHTML = `
-            <h2 class="taskBox__ContentHeader">Zadanie nr ${(+containerButton.innerText)}</h2>
-                <h3 class="taskBox__ContentSubHeader">Cytat na dziś:</h3>
-                    <p class="taskBox__ContentQuote">
-                        ${quotes[(+containerButton.innerText) % 3].content}
-                        <span class="taskBox__ContentQuoteAuthor">
-                        ${quotes[(+containerButton.innerText) % 3].author}
-                        </span>
-                    </p>
-                <p class="taskBox__ContentParagraph js-taskBox__ContentParagraph">
-                    ${tasks[(+taskIndex)].content}
-                </p>
-                <button class="taskBox__Button js-taskBox__button">
-                    Wzajemnie!
-                </button>`
+                        taskBoxContent.innerHTML += `
+                    <button class="taskBox__Button js-taskBox__button">
+                        Wzajemnie!
+                    </button>`
                         const taskBoxContentParagraph = document.querySelector(".js-taskBox__ContentParagraph");
                         taskBoxContentParagraph.classList.add("taskBox__ContentParagraph--merryChristmassed");
                     } else {
-                        taskBoxContent.innerHTML = `
-            <h2 class="taskBox__ContentHeader">Zadanie nr ${(+containerButton.innerText)}</h2>
-                <h3 class="taskBox__ContentSubHeader">Cytat na dziś:</h3>
-                    <p class="taskBox__ContentQuote">
-                        ${quotes[(+containerButton.innerText) % 3].content}
-                        <span class="taskBox__ContentQuoteAuthor">
-                        ${quotes[(+containerButton.innerText) % 3].author}
-                        </span>
-                    </p>
-                <p class="taskBox__ContentParagraph">
-                    ${tasks[(+taskIndex)].content}
-                </p>
-                <button class="taskBox__Button js-taskBox__button">
-                    Do dzieła!
-                </button>
-        `;
+                        taskBoxContent.innerHTML += `
+                    <button class="taskBox__Button js-taskBox__button">
+                        Do dzieła!
+                    </button>
+                    `;
                     }
                     const taskBoxButton = document.querySelector(".js-taskBox__button");
                     taskBoxButton.addEventListener("click", () => {
