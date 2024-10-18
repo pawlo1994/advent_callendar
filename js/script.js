@@ -1,4 +1,7 @@
 {
+    const date = new Date(Date.now());
+    const dayOfMonth = date.getDate();
+    const month = date.getMonth() + 1;
     const tasks = JSON.parse(localStorage.getItem("tasks"));
     const author = "Robert Baden-Powell";
     const quotes = [
@@ -18,7 +21,7 @@
 
     let isDone = false;
 
-    let listOfTasks = (tasks == null) ? [
+    let listOfTasks = ((tasks == null) || (month !== 12)) ? [
         {
             content: "Wesołych świąt!!!",
             dayNumber: 24,
@@ -222,14 +225,11 @@
         localStorage.setItem("tasks", JSON.stringify(tasks));
     };
 
-    const render = () => {
-        const date = new Date(Date.now());
-        const dayOfMonth = date.getDate();
-        const month = date.getMonth() + 1;
+    const render = (dayOfMonth, month) => {
         renderButtons(listOfTasks, dayOfMonth, month);
         const taskBox = document.querySelector(".js-taskBox");
         containerButtonsEvents(listOfTasks, taskBox, dayOfMonth);
     };
 
-    render();
+    render(dayOfMonth, month);
 };
