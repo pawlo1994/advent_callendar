@@ -21,89 +21,91 @@
 
     let isDone = false;
 
-    let listOfTasks = ((tasks == null) || (month !== 12)) ? [
+    const defaultTasks = [
         {
-            content: "Wesołych świąt!!!",
+            content: `To już ostatnie zadanie - 
+            Przeczytaj świąteczne opowiadanie.
+            wesołych świąt!!!`,
             dayNumber: 24,
             isDone
         },
         {
-            content: "Ubierzcie razem choinkę",
+            content: "Udekoruj choinkę",
             dayNumber: 23,
             isDone
         },
         {
-            content: `Obejrzyj lub przeczytaj "Opowieść wigilijną"`,
+            content: "Urządźcie sobie maraton świątecznych filmów",
             dayNumber: 22,
             isDone
         },
         {
-            content: "Zrób sobie z rodziną świąteczne zdjęcie",
+            content: "Posprzątaj pokój na święta",
             dayNumber: 21,
             isDone
         },
         {
-            content: "Pomóż przygotować świąteczną potrawę",
+            content: "Zrób ozdoby na choinkę",
             dayNumber: 20,
             isDone
         },
         {
-            content: "Zadzwoń do bliskich i powiedz im coś miłego",
+            content: "Przygotuj śniadanie dla rodziców",
             dayNumber: 10,
             isDone
         },
         {
-            content: "Zrób łańcuch choinkowy",
+            content: `Naucz się mówić "Wesołych świąt" w innym języku`,
             dayNumber: 12,
             isDone
         },
         {
-            content: "Naucz się śpiewać jedną kolędę",
+            content: "Zróbcie bitwę na śnieżki (jeśli nie ma śniegu - bądźcie kreatywni)",
             dayNumber: 14,
             isDone
         },
         {
-            content: `Naucz się "Wesołych świąt" w innym języku`,
+            content: "Przygotuj ozdobę na drzwi Twojego domu/pokoju",
             dayNumber: 16,
             isDone
         },
         {
-            content: "Zrób dobry uczynek koledze / koleżance",
+            content: "Pokoloruj świąteczną kolorowankę",
             dayNumber: 5,
             isDone
         },
         {
-            content: "Przygotujcie z rodzicami poczęstunek dla ptaszków",
+            content: "Zabaw się w Mikołaja. Zrób porządek w zabawkach i przekaż innym dzieciom te, którymi się już nie bawisz",
             dayNumber: 6,
             isDone
         },
         {
-            content: "Upieczcie pierniczki i udekorujcie je",
+            content: "Odwiedź świąteczny jarmark",
             dayNumber: 7,
             isDone
         },
         {
-            content: "Zrób porządek w zabawkach - pomyśl o innych i podaruj niepotrzebne zabawki innym dzieciom",
+            content: "Ususz plastry pomarańczy",
             dayNumber: 8,
             isDone
         },
         {
-            content: "Zróbcie sobie wieczór świątecznych filmów",
+            content: "Poznaj świąteczne zwyczaje innych krajów",
             dayNumber: 13,
             isDone
         },
         {
-            content: "Zbuduj z klocków coś świątecznego",
+            content: "Pokaż jaki nietypowy zwyczaj świąteczny panuje u Ciebie w domu",
             dayNumber: 15,
             isDone
         },
         {
-            content: "Dowiedz się jak wyglądają święta w innych krajach",
+            content: "Ulepcie z kolegami/koleżankami bałwana (jeśli nie ma śniegu - bądźcie kreatywni)",
             dayNumber: 17,
             isDone
         },
         {
-            content: "Przeczytaj lub obejrzyj historię narodzin Jezusa",
+            content: "Naucz się nowej kolędy/pastorałki",
             dayNumber: 19,
             isDone
         },
@@ -113,36 +115,41 @@
             isDone
         },
         {
-            content: "Zabierz rodzinę na zimowy spacer",
+            content: "Zagrajcie całą rodziną w ulubioną grę",
             dayNumber: 2,
             isDone
         },
         {
-            content: "Pokoloruj świąteczną kolorowankę",
+            content: "Wykonaj własnoręcznie ozdobę/upominek dla pani w szkole/przedszkolu",
             dayNumber: 3,
             isDone
         },
         {
-            content: "Wykonaj własnoręcznie ozdobę choinkową",
+            content: "Upiecz z pomocą bliskich świąteczne ciasteczka",
             dayNumber: 4,
             isDone
         },
         {
-            content: "Przygotuj dla rodziców gorącą czekoladę",
+            content: "Zabierz rodzinę na zimowy spacer",
             dayNumber: 9,
             isDone
         },
         {
-            content: "Poznaj świąteczne zwyczaje Twojej rodziny",
+            content: "Zrób świąteczną kartkę i wyślij do kogoś ważnego dla Ciebie",
             dayNumber: 11,
             isDone
         },
         {
-            content: "Powiedz coś miłego 3 osobom",
+            content: "Poszukajcie z rodzicami najładniej udekorowanego domu",
             dayNumber: 18,
             isDone
         }
-    ] : tasks;
+    ];
+
+    let defaultTasksContents = [defaultTasks.map(({ content }) => ({ content }))];
+    let tasksContents = [(tasks.map(({ content }) => ({ content })))];
+
+    let listOfTasks = ((tasks == null) || (month !== 12) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
 
     const toggleTaskDone = (tasks, dayOfMonth) => {
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
@@ -171,22 +178,15 @@
                             <p class="taskBox__ContentParagraph js-taskBox__ContentParagraph">
                                 ${tasks[(+taskIndex)].content}
                             </p>
+                            <button class="taskBox__Button js-taskBox__button">
+                                Do dzieła!
+                            </button>
                     `;
                     if ((+containerButton.innerText) === 24) {
                         taskBox.classList.add("taskBox--merryChristmassed");
-                        taskBoxContent.innerHTML += `
-                    <button class="taskBox__Button js-taskBox__button">
-                        Wzajemnie!
-                    </button>`
                         const taskBoxContentParagraph = document.querySelector(".js-taskBox__ContentParagraph");
                         taskBoxContentParagraph.classList.add("taskBox__ContentParagraph--merryChristmassed");
-                    } else {
-                        taskBoxContent.innerHTML += `
-                    <button class="taskBox__Button js-taskBox__button">
-                        Do dzieła!
-                    </button>
-                    `;
-                    }
+                    };
                     const taskBoxButton = document.querySelector(".js-taskBox__button");
                     taskBoxButton.addEventListener("click", () => {
                         toggleTaskDone(tasks, (+containerButton.innerText), dayOfMonth);
@@ -231,5 +231,6 @@
         containerButtonsEvents(listOfTasks, taskBox, dayOfMonth);
     };
 
+    console.log((JSON.stringify(defaultTasksContents) === JSON.stringify(tasksContents)));
     render(dayOfMonth, month);
 };
