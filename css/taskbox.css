@@ -18,21 +18,6 @@
     user-select: none;
 }
 
-.taskBox--merryChristmassed {
-    --dot-bg: rgb(73, 177, 218);
-    --dot-color: rgb(234, 234, 234);
-    --dot-size: 5px;
-    --dot-space: 22px;
-    background:
-        linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-        var(--dot-color);
-    animation-name: letItSnow;
-    animation-timing-function: ease;
-    animation-iteration-count: infinite;
-    animation-duration: 2s;
-}
-
 .taskBox__Content {
     text-shadow: 0px 0px 5px #fff;
     display: flex;
@@ -104,23 +89,6 @@
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-duration: 1s;
-}
-
-@keyframes letItSnow {
-    from {
-        background-position-x: 0px;
-        background-position-y: 0px;
-    }
-
-    50% {
-        background-position-x: 30px;
-        background-position-y: 100px;
-    }
-
-    to {
-        background-position-x: 0px;
-        background-position-y: 200px;
-    }
 }
 
 @keyframes blinkText {
