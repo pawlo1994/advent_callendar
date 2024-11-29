@@ -147,7 +147,7 @@
     ];
 
     let defaultTasksContents = [defaultTasks.map(({ content }) => ({ content }))];
-    let tasksContents = [(tasks.map(({ content }) => ({ content })))];
+    let tasksContents = ((tasks == null)) ? defaultTasksContents : [(tasks.map(({ content }) => ({ content })))];
 
     let listOfTasks = ((tasks == null) || (month !== 12) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
 
@@ -183,7 +183,6 @@
                             </button>
                     `;
                     if ((+containerButton.innerText) === 24) {
-                        taskBox.classList.add("taskBox--merryChristmassed");
                         const taskBoxContentParagraph = document.querySelector(".js-taskBox__ContentParagraph");
                         taskBoxContentParagraph.classList.add("taskBox__ContentParagraph--merryChristmassed");
                     };
