@@ -59,6 +59,25 @@
     height: 16px;
 }
 
+.containerButton--inProgress {
+    animation-name: blinkButton;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-duration: 1s;
+}
+
+.containerButton--inProgress::after {
+    display: block;
+    margin: 0 auto;
+    content: "";
+    background-color: transparent;
+    background-image: url("../images/inProgress.png");
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
 .containerButton--done {
     filter: brightness(120%);
     box-shadow: 0px 0px 5px 5px #00ff00;
@@ -88,4 +107,26 @@
 
 .containerButton:active {
     filter: invert();
+}
+
+@keyframes blinkButton {
+    from {
+        filter: initial;
+    }
+
+    25% {
+        filter: brightness(120%);
+    }
+
+    50% {
+        filter: brightness(150%);
+    }
+
+    75% {
+        filter: brightness(100%);
+    }
+
+    to {
+        filter: brightness(80%);
+    }
 }
