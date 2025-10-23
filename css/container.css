@@ -9,6 +9,24 @@
     gap: 20px;
 }
 
+.containerHeader {
+    font-size: 24px;
+    margin: 0;
+}
+
+.containerHeaderBox {
+    display: block;
+    margin: 0 auto;
+    padding: 5px 0;
+    border-radius: 5px;
+    background-color: #aa0000aa;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 2px #666;
+    box-shadow: 1px 1px 5px 5px #aaa;
+    font-size: 16px;
+}
+
 .containerButton {
     width: 70px;
     height: 70px;
