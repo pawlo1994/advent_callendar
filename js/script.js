@@ -19,7 +19,7 @@
         },
     ];
 
-    let taskStatus = "pending";
+    let taskStatus = "locked";
 
     const defaultTasks = [
         {
@@ -170,6 +170,16 @@
         renderButtons(tasks, dayOfMonth);
     };
 
+    const toggleTaskPending = (tasks, dayOfMonth) => {
+        let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
+        tasks = [
+            ...tasks.slice(0, index),
+            { ...tasks[index], taskStatus: "pending" },
+            ...tasks.slice(index + 1),
+        ];
+        renderButtons(tasks, dayOfMonth);
+    };
+
     const setTaskBoxContent = (tasks, taskBox, containerButton, dayOfMonth) => {
         const taskBoxContent = document.querySelector(".js-taskBox__Content");
         let taskIndex = tasks.findIndex(({ dayNumber }) => dayNumber === +containerButton.innerText);
@@ -223,19 +233,31 @@
 
     const renderButtons = (tasks, month) => {
         const container = document.querySelector(".js-container");
+        const containerHeaderBox = document.querySelector(".js-containerHeaderBox");
+        const todayTaskIndex = tasks.findIndex(({ dayNumber }) => (dayNumber === dayOfMonth));
+        containerHeaderBox.innerHTML =
+            `<h3 class="containerHeader">
+                Dzisiejsze zadanie:
+                </h3>
+                    <p>${(todayTaskIndex > -1)
+                ? tasks[todayTaskIndex].content
+                : ""}
+                </p>`;
         let HTMLString = "";
 
         tasks.forEach((task) => {
             HTMLString +=
                 `<button class=
                 "containerButton js-containerButton
-                ${((month !== 10) && (task.dayNumber !== dayOfMonth))
-                    ? `containerButton--locked`
+                ${((month === 10) && (task.dayNumber === dayOfMonth) && (task.taskStatus === locked))
+                    ? ""
                     : (task.taskStatus === "inProgress")
                         ? "containerButton--inProgress"
                         : (task.taskStatus === "done")
-                            ? `containerButton--done`
-                            : ""}" 
+                            ? "containerButton--done"
+                            : (task.taskStatus === "locked")
+                                ? "containerButton--locked"
+                                : ""}" 
                 ${((task.taskStatus === "done") || (month !== 10) && (task.dayNumber !== dayOfMonth))
                     ? "disabled"
                     : ((task.taskStatus === "pending") || (task.taskStatus === "inProgress"))
