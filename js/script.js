@@ -19,8 +19,7 @@
         },
     ];
 
-    let isDone = false;
-    let isInProgress = false;
+    let taskStatus = "pending";
 
     const defaultTasks = [
         {
@@ -28,159 +27,134 @@
             Przeczytaj świąteczne opowiadanie.
             wesołych świąt!!!`,
             dayNumber: 24,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Udekoruj choinkę",
             dayNumber: 23,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Urządźcie sobie maraton świątecznych filmów",
             dayNumber: 22,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Posprzątaj pokój na święta",
             dayNumber: 21,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Zrób ozdoby na choinkę",
             dayNumber: 20,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Przygotuj śniadanie dla rodziców",
             dayNumber: 10,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: `Naucz się mówić "Wesołych świąt" w innym języku`,
             dayNumber: 12,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Zróbcie bitwę na śnieżki (jeśli nie ma śniegu - bądźcie kreatywni)",
             dayNumber: 14,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Przygotuj ozdobę na drzwi Twojego domu/pokoju",
             dayNumber: 16,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Pokoloruj świąteczną kolorowankę",
             dayNumber: 5,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Zabaw się w Mikołaja. Zrób porządek w zabawkach i przekaż innym dzieciom te, którymi się już nie bawisz",
             dayNumber: 6,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Odwiedź świąteczny jarmark",
             dayNumber: 7,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Ususz plastry pomarańczy",
             dayNumber: 8,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Poznaj świąteczne zwyczaje innych krajów",
             dayNumber: 13,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Pokaż jaki nietypowy zwyczaj świąteczny panuje u Ciebie w domu",
             dayNumber: 15,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Ulepcie z kolegami/koleżankami bałwana (jeśli nie ma śniegu - bądźcie kreatywni)",
             dayNumber: 17,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Naucz się nowej kolędy/pastorałki",
             dayNumber: 19,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Napisz list do świętego Mikołaja",
             dayNumber: 1,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Zagrajcie całą rodziną w ulubioną grę",
             dayNumber: 2,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Wykonaj własnoręcznie ozdobę/upominek dla pani w szkole/przedszkolu",
             dayNumber: 3,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Upiecz z pomocą bliskich świąteczne ciasteczka",
             dayNumber: 4,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Zabierz rodzinę na zimowy spacer",
             dayNumber: 9,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Zrób świąteczną kartkę i wyślij do kogoś ważnego dla Ciebie",
             dayNumber: 11,
-            isDone,
-            isInProgress
+            taskStatus
         },
         {
             content: "Poszukajcie z rodzicami najładniej udekorowanego domu",
             dayNumber: 18,
-            isDone,
-            isInProgress
+            taskStatus
         }
     ];
 
     let defaultTasksContents = [defaultTasks.map(({ content }) => ({ content }))];
     let tasksContents = ((tasks == null)) ? defaultTasksContents : [(tasks.map(({ content }) => ({ content })))];
-
     let listOfTasks = ((tasks == null) || (month !== 10) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
 
     const toggleTaskInProgress = (tasks, dayOfMonth) => {
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
         tasks = [
             ...tasks.slice(0, index),
-            { ...tasks[index], isInProgress: tasks[index].isInProgress = true },
+            { ...tasks[index], taskStatus: "inProgress" },
             ...tasks.slice(index + 1),
         ];
         renderButtons(tasks, dayOfMonth);
@@ -190,7 +164,7 @@
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
         tasks = [
             ...tasks.slice(0, index),
-            { ...tasks[index], isDone: tasks[index].isDone = true, isInProgress: tasks[index].isInProgress = false },
+            { ...tasks[index], taskStatus: "done" },
             ...tasks.slice(index + 1),
         ];
         renderButtons(tasks, dayOfMonth);
@@ -215,7 +189,7 @@
                                 ${tasks[(+taskIndex)].content}
                             </p>
                             <button class="taskBox__Button js-taskBox__button">
-                                ${tasks[(+taskIndex)].isInProgress === false ? `Do dzieła!` : `Zrobione!`}
+                                ${tasks[(+taskIndex)].taskStatus === "pending" ? `Do dzieła!` : (tasks[(+taskIndex)].taskStatus === "inProgress") ? `Zrobione!` : ''}
                             </button>
                     `;
                     if ((+containerButton.innerText) === 24) {
@@ -224,7 +198,7 @@
                     };
                     const taskBoxButton = document.querySelector(".js-taskBox__button");
                     taskBoxButton.addEventListener("click", () => {
-                        if ((tasks[(+taskIndex)].isInProgress === false) && (tasks[(+taskIndex)].isDone === false)) {
+                        if (tasks[(+taskIndex)].taskStatus === "pending") {
                             toggleTaskInProgress(tasks, (+containerButton.innerText), dayOfMonth);
                         }
                         else {
@@ -247,7 +221,7 @@
         });
     };
 
-    const renderButtons = (tasks, dayOfMonth, month) => {
+    const renderButtons = (tasks, month) => {
         const container = document.querySelector(".js-container");
         let HTMLString = "";
 
@@ -255,18 +229,18 @@
             HTMLString +=
                 `<button class=
                 "containerButton js-containerButton
-                ${((month === 10) && (task.dayNumber === dayOfMonth) && (task.isDone === false)) && (task.isInProgress === false)
-                    ? ""
-                    : ((task.isInProgress === true) && (task.isDone === false))
+                ${((month !== 10) && (task.dayNumber !== dayOfMonth))
+                    ? `containerButton--locked`
+                    : (task.taskStatus === "inProgress")
                         ? "containerButton--inProgress"
-                        : "containerButton--locked"}
-            ${((task.isDone === true) && (task.isInProgress === false))
-                    ? "containerButton--done"
-                    : ""}" 
-                ${((task.dayNumber !== dayOfMonth) || (month !== 10) ||
-                    ((task.isDone === true)) && (task.isInProgress === false))
+                        : (task.taskStatus === "done")
+                            ? `containerButton--done`
+                            : ""}" 
+                ${((task.taskStatus === "done") || (month !== 10) && (task.dayNumber !== dayOfMonth))
                     ? "disabled"
-                    : ""}>
+                    : ((task.taskStatus === "pending") || (task.taskStatus === "inProgress"))
+                        ? ""
+                        : ''}>
                         ${task.dayNumber}
                 </button>`;
         });
