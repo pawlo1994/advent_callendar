@@ -2,7 +2,8 @@
     const date = new Date(Date.now());
     const dayOfMonth = date.getDate();
     const month = date.getMonth() + 1;
-    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    const tasks = JSON.parse(localStorage.getItem("ZHP_tasks"));
+    let taskStatus = "locked";
     const author = "Robert Baden-Powell";
     const quotes = [
         {
@@ -18,8 +19,6 @@
             author
         },
     ];
-
-    let taskStatus = "locked";
 
     const defaultTasks = [
         {
@@ -148,7 +147,7 @@
 
     let defaultTasksContents = [defaultTasks.map(({ content }) => ({ content }))];
     let tasksContents = ((tasks == null)) ? defaultTasksContents : [(tasks.map(({ content }) => ({ content })))];
-    let listOfTasks = ((tasks == null) || (month !== 10) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
+    let listOfTasks = ((tasks == null) || (month !== 11) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
 
     const toggleTaskInProgress = (tasks, dayOfMonth) => {
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
@@ -225,16 +224,29 @@
         const container = document.querySelector(".js-container");
         const containerHeaderBox = document.querySelector(".js-containerHeaderBox");
         const todayTaskIndex = tasks.findIndex(({ dayNumber }) => (dayNumber === dayOfMonth));
-        console.log(month);
+        const todayTaskStatus = tasks[todayTaskIndex].taskStatus;
+        let showDailyTaskContent = ((todayTaskStatus === "inProgress")) ? true : false;
+        console.log(todayTaskStatus);
         containerHeaderBox.innerHTML =
-            (month !== 10) &&
+            showDailyTaskContent &&
+            showDailyTaskContent &&
             `<h3 class="containerHeader">
                 Dzisiejsze zadanie:
                 </h3>
                     <p>${(todayTaskIndex > -1)
                 ? `${tasks[todayTaskIndex].content} (Odśwież stronę przed potwierdzeniem zadania)`
                 : ""}
-                </p>` || null
+                </p>`
+            || `<h3 class="containerHeader">
+                </h3>
+                    <p>${(month === 11)
+                ? (todayTaskStatus !== "done")
+                    ? `Kliknij na przycisk z numerem ${dayOfMonth}`
+                    : "Dobra robota! Do zobaczenia jutro."
+                : ((month !== 11) && (todayTaskStatus !== "done"))
+                    ? "Zajrzyj tutaj w grudniu"
+                    : "Dobra robota! Do zobaczenia jutro."}
+                </p>`
             ;
         let HTMLString = "";
 
@@ -242,27 +254,31 @@
             HTMLString +=
                 `<button class=
                 "containerButton js-containerButton
-                ${((month === 10) && (task.dayNumber === dayOfMonth) && (task.taskStatus === "locked"))
+                ${((month === 11) && (task.dayNumber === dayOfMonth) && (task.taskStatus === "locked"))
                     ? ""
                     : ((task.taskStatus === "inProgress") && (task.dayNumber === dayOfMonth))
                         ? "containerButton--inProgress"
                         : (task.taskStatus === "done")
                             ? "containerButton--done"
-                            : ((task.taskStatus === "locked") && (task.dayNumber !== dayOfMonth)) || (month !== 10)
+                            : ((task.taskStatus === "locked") && (task.dayNumber !== dayOfMonth))
+                                || ((task.taskStatus === "inProgress") && (task.dayNumber !== dayOfMonth))
+                                || (month !== 11)
                                 ? "containerButton--locked"
                                 : ""}" 
-                ${((task.taskStatus === "done") || (month !== 10) || (task.dayNumber !== dayOfMonth) && (task.taskStatus === "locked"))
+                ${((task.taskStatus === "done") || (month !== 11)
+                    || ((task.dayNumber !== dayOfMonth) && (task.taskStatus === "locked"))
+                    || ((task.dayNumber !== dayOfMonth) && (task.taskStatus === "inProgress")))
                     ? "disabled"
                     : ((task.dayNumber === dayOfMonth) || (task.taskStatus === "inProgress"))
                         ? ""
                         : ''
                 }>
         ${task.dayNumber}
-                </button > `;
+                </button> `;
         });
 
         container.innerHTML = HTMLString;
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("ZHP_tasks", JSON.stringify(tasks));
     };
 
     const render = (dayOfMonth, month) => {
