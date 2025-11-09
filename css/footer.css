@@ -1,7 +1,6 @@
 .footer {
-    position: sticky;
-    padding: 10px 0;
-    bottom: 0;
+    opacity: 50%;
+    margin: -20px 0;
     font-size: 20px;
     text-align: center;
     color: #ffA;
