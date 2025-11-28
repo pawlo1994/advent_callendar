@@ -147,7 +147,7 @@
 
     let defaultTasksContents = [defaultTasks.map(({ content }) => ({ content }))];
     let tasksContents = ((tasks == null)) ? defaultTasksContents : [(tasks.map(({ content }) => ({ content })))];
-    let listOfTasks = ((tasks == null) || (month !== 11) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
+    let listOfTasks = ((tasks == null) || (month !== 12) || (JSON.stringify(defaultTasksContents) !== JSON.stringify(tasksContents))) ? defaultTasks : tasks;
 
     const toggleTaskInProgress = (tasks, dayOfMonth) => {
         let index = tasks.findIndex(({ dayNumber }) => dayNumber === dayOfMonth);
@@ -224,12 +224,10 @@
         const container = document.querySelector(".js-container");
         const containerHeaderBox = document.querySelector(".js-containerHeaderBox");
         const todayTaskIndex = tasks.findIndex(({ dayNumber }) => (dayNumber === dayOfMonth));
-        const todayTaskStatus = tasks[todayTaskIndex].taskStatus;
-        let showDailyTaskContent = ((todayTaskStatus === "inProgress")) ? true : false;
-        console.log(todayTaskStatus);
+        const todayTaskStatus = todayTaskIndex > -1 ? tasks[todayTaskIndex].taskStatus : null;
+        let isDailyTaskContentShown = ((todayTaskStatus === "inProgress")) ? true : false;
         containerHeaderBox.innerHTML =
-            showDailyTaskContent &&
-            showDailyTaskContent &&
+            isDailyTaskContentShown &&
             `<h3 class="containerHeader">
                 Dzisiejsze zadanie:
                 </h3>
@@ -239,13 +237,13 @@
                 </p>`
             || `<h3 class="containerHeader">
                 </h3>
-                    <p>${(month === 11)
-                ? (todayTaskStatus !== "done")
-                    ? `Kliknij na przycisk z numerem ${dayOfMonth}`
-                    : "Dobra robota! Do zobaczenia jutro."
-                : ((month !== 11) && (todayTaskStatus !== "done"))
-                    ? "Zajrzyj tutaj w grudniu"
-                    : "Dobra robota! Do zobaczenia jutro."}
+                    <p>${(month === 12) && (dayOfMonth <= 24) && (todayTaskStatus !== "done")
+                ? `Kliknij na przycisk z numerem ${dayOfMonth}`
+                : (todayTaskStatus === "done")
+                    ? "Dobra robota! Do zobaczenia jutro."
+                    : (month === 12) && (dayOfMonth > 24)
+                        ? "Wesołych świąt i szczęśliwego Nowego Roku"
+                        : "Zajrzyj tutaj w grudniu"}
                 </p>`
             ;
         let HTMLString = "";
@@ -254,7 +252,7 @@
             HTMLString +=
                 `<button class=
                 "containerButton js-containerButton
-                ${((month === 11) && (task.dayNumber === dayOfMonth) && (task.taskStatus === "locked"))
+                ${((month === 12) && (task.dayNumber === dayOfMonth) && (task.taskStatus === "locked"))
                     ? ""
                     : ((task.taskStatus === "inProgress") && (task.dayNumber === dayOfMonth))
                         ? "containerButton--inProgress"
@@ -262,10 +260,10 @@
                             ? "containerButton--done"
                             : ((task.taskStatus === "locked") && (task.dayNumber !== dayOfMonth))
                                 || ((task.taskStatus === "inProgress") && (task.dayNumber !== dayOfMonth))
-                                || (month !== 11)
+                                || (month !== 12)
                                 ? "containerButton--locked"
                                 : ""}" 
-                ${((task.taskStatus === "done") || (month !== 11)
+                ${((task.taskStatus === "done") || (month !== 12)
                     || ((task.dayNumber !== dayOfMonth) && (task.taskStatus === "locked"))
                     || ((task.dayNumber !== dayOfMonth) && (task.taskStatus === "inProgress")))
                     ? "disabled"
