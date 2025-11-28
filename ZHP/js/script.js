@@ -29,118 +29,127 @@
             taskStatus
         },
         {
-            content: "Udekoruj choinkę",
-            dayNumber: 23,
-            taskStatus
-        },
-        {
-            content: "Urządźcie sobie maraton świątecznych filmów",
-            dayNumber: 22,
-            taskStatus
-        },
-        {
-            content: "Posprzątaj pokój na święta",
-            dayNumber: 21,
-            taskStatus
-        },
-        {
-            content: "Zrób ozdoby na choinkę",
-            dayNumber: 20,
-            taskStatus
-        },
-        {
-            content: "Przygotuj śniadanie dla rodziców",
-            dayNumber: 10,
-            taskStatus
-        },
-        {
-            content: `Naucz się mówić "Wesołych świąt" w innym języku`,
-            dayNumber: 12,
-            taskStatus
-        },
-        {
-            content: "Zróbcie bitwę na śnieżki (jeśli nie ma śniegu - bądźcie kreatywni)",
-            dayNumber: 14,
-            taskStatus
-        },
-        {
-            content: "Przygotuj ozdobę na drzwi Twojego domu/pokoju",
-            dayNumber: 16,
-            taskStatus
-        },
-        {
-            content: "Pokoloruj świąteczną kolorowankę",
-            dayNumber: 5,
-            taskStatus
-        },
-        {
-            content: "Zabaw się w Mikołaja. Zrób porządek w zabawkach i przekaż innym dzieciom te, którymi się już nie bawisz",
-            dayNumber: 6,
-            taskStatus
-        },
-        {
-            content: "Odwiedź świąteczny jarmark",
-            dayNumber: 7,
-            taskStatus
-        },
-        {
-            content: "Ususz plastry pomarańczy",
-            dayNumber: 8,
-            taskStatus
-        },
-        {
-            content: "Poznaj świąteczne zwyczaje innych krajów",
-            dayNumber: 13,
-            taskStatus
-        },
-        {
-            content: "Pokaż jaki nietypowy zwyczaj świąteczny panuje u Ciebie w domu",
-            dayNumber: 15,
-            taskStatus
-        },
-        {
-            content: "Ulepcie z kolegami/koleżankami bałwana (jeśli nie ma śniegu - bądźcie kreatywni)",
-            dayNumber: 17,
-            taskStatus
-        },
-        {
-            content: "Naucz się nowej kolędy/pastorałki",
-            dayNumber: 19,
-            taskStatus
-        },
-        {
             content: "Napisz list do świętego Mikołaja",
             dayNumber: 1,
             taskStatus
         },
         {
-            content: "Zagrajcie całą rodziną w ulubioną grę",
-            dayNumber: 2,
+            content: "Pobaw się w Mikołaja i przygotuj dla kogoś niespodziankę",
+            dayNumber: 5,
             taskStatus
         },
         {
-            content: "Wykonaj własnoręcznie ozdobę/upominek dla pani w szkole/przedszkolu",
-            dayNumber: 3,
-            taskStatus
-        },
-        {
-            content: "Upiecz z pomocą bliskich świąteczne ciasteczka",
+            content: "Przygotuj małą ozdobę świąteczną",
             dayNumber: 4,
             taskStatus
         },
         {
-            content: "Zabierz rodzinę na zimowy spacer",
+            content: "Pomóż przy świątecznych porządkach",
+            dayNumber: 2,
+            taskStatus
+        },
+        {
+            content: `Pomóż przygotować świąteczne wypieki
+            – pierniki, kruche ciastka, cokolwiek!`,
+            dayNumber: 8,
+            taskStatus
+        },
+        {
+            content: `Z pomocą bliskich przygotuj zimową herbatę -
+            użyj swoich ulubionych składników`,
+            dayNumber: 3,
+            taskStatus
+        },
+        {
+            content: `Zrób „łańcuch dobrych uczynków”
+            – jedna karteczka = jeden dobry uczynek.`,
+            dayNumber: 10,
+            taskStatus
+        },
+        {
+            content: "Naucz się nowej kolędy lub pastorałki.",
+            dayNumber: 7,
+            taskStatus
+        },
+        {
+            content: "Zagraj z rodziną w grę planszową lub karcianą.",
             dayNumber: 9,
             taskStatus
         },
         {
-            content: "Zrób świąteczną kartkę i wyślij do kogoś ważnego dla Ciebie",
+            content: "Wybierz się na jarmark bożonarodzeniowy",
+            dayNumber: 6,
+            taskStatus
+        },
+        {
+            content: "Wybierz się z rodziną na zimowy spacer lub sanki",
+            dayNumber: 14,
+            taskStatus
+        },
+        {
+            content: `Zorganizuj rodzinny seans świąteczny
+            – wybierzcie razem bajkę lub film.`,
             dayNumber: 11,
             taskStatus
         },
         {
-            content: "Poszukajcie z rodzicami najładniej udekorowanego domu",
+            content: `Wyślij lub przekaż życzenia komuś
+            z kim dawno nie rozmawiałeś lub komuś
+            kto jest dla Ciebie ważny`,
+            dayNumber: 13,
+            taskStatus
+        },
+        {
+            content: `Zrób porządek w zabawkach,
+            jeśli jest coś czego nie potrzebujesz podaruj je komuś innemu`,
+            dayNumber: 15,
+            taskStatus
+        },
+        {
+            content: `Przygotuj coś dobrego dla ptaszków
+            – np. ziarna lub kulę tłuszczową.`,
+            dayNumber: 12,
+            taskStatus
+        },
+        {
+            content: `Naucz się "Wesołych Świąt" w innym języku`,
             dayNumber: 18,
+            taskStatus
+        },
+        {
+            content: `Dowiedz się jakie są zwyczaje w innych krajach
+            lub jak dawniej obchodziło się święta w twoim domu`,
+            dayNumber: 16,
+            taskStatus
+        },
+        {
+            content: "Wybierz się na kolędowanie z przyjaciółmi",
+            dayNumber: 20,
+            taskStatus
+        },
+        {
+            content: "Przygotuj lampion na światełko betlejemskie",
+            dayNumber: 17,
+            taskStatus
+        },
+        {
+            content: "Ulep bałwana z przyjaciółmi",
+            dayNumber: 19,
+            taskStatus
+        },
+        {
+            content: "Pochwal się swoją choinką",
+            dayNumber: 23,
+            taskStatus
+        },
+        {
+            content: "Zróbcie sobie świąteczne zdjęcie (według swojego pomysłu)",
+            dayNumber: 21,
+            taskStatus
+        },
+        {
+            content: "Pomóż mamie lub tacie przygotować jedną potrawę wigilijną",
+            dayNumber: 22,
             taskStatus
         }
     ];
