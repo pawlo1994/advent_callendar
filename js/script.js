@@ -230,6 +230,5 @@
         containerButtonsEvents(listOfTasks, taskBox, dayOfMonth);
     };
 
-    console.log((JSON.stringify(defaultTasksContents) === JSON.stringify(tasksContents)));
     render(dayOfMonth, month);
 };
